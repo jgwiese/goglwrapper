@@ -11,6 +11,7 @@
 class t_program {
 public:
     GLuint id;
+    std::string name;
     t_program(t_shader *p_shader_vertex, t_shader *p_shader_fragment, std::string name);
     ~t_program();
     void set_float(std::string name, float v);
@@ -18,7 +19,6 @@ public:
     void set_transformation(std::string name, glm::mat4 transformation);
 
 private:
-    std::string name;
 };
 
 #endif // PROGRAM_H

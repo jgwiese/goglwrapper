@@ -7,6 +7,8 @@
 #include "texture.h"
 #include "depth_texture.h"
 #include "shader.h"
+#include "shader_vertex.h"
+#include "shader_fragment.h"
 #include "program.h"
 #include "renderobject.h" // TODO: maybe rewrite
 #include "debug.h"

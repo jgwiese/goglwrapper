@@ -5,8 +5,8 @@
 
 
 t_program::t_program(t_shader *p_shader_vertex, t_shader *p_shader_fragment, std::string name) {
-    this->name = name;
     this->id = glCreateProgram();
+    this->name = name;
     glAttachShader(this->id, p_shader_vertex->id);
     glAttachShader(this->id, p_shader_fragment->id);
     glLinkProgram(this->id);

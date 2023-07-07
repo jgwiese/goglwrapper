@@ -30,12 +30,3 @@ t_shader::t_shader(std::string path, GLenum shader_type, std::string name) {
 t_shader::~t_shader() {
 
 }
-
-t_shader *t_shader::t_vertex_shader(std::string path, std::string name) {
-    return new t_shader(path, GL_VERTEX_SHADER, name);
-}
-
-t_shader *t_fragment_shader(std::string path, std::string name) {
-    return new t_shader(path, GL_FRAGMENT_SHADER, name);
-}
-
