@@ -1,7 +1,9 @@
 #include "../include/renderobject.h"
+#include <glad/glad.h>
 #include <stdlib.h>
 #include <string>
 #include <glm/gtx/string_cast.hpp>
+#include <iostream>
 
 
 t_renderobject::t_renderobject(t_mesh *p_mesh) {
@@ -45,12 +47,15 @@ void t_renderobject::draw(t_program *p_program, t_texture *p_texture) {
         GLint tmp = glGetUniformLocation(p_program->id, p_texture->get_name().c_str());
         glUniform1i(tmp, 0);
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, p_texture->id);
+        // TODO: how to decide when to bind multisample vs normal texture?
+        glBindTexture(GL_TEXTURE_2D, p_texture->get_id());
+        //glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, p_texture->get_id());
     }
     glBindVertexArray(this->vao);
     glDrawElements(GL_TRIANGLES, this->indices_size, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
     glBindTexture(GL_TEXTURE_2D, 0);
+    //glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
     glUseProgram(0);
 }
 

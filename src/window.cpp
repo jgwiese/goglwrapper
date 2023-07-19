@@ -11,6 +11,9 @@ t_window::t_window(const unsigned int width, const unsigned int height, const st
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
 
+    // msaa here only important for default framebuffer.
+    //glfwWindowHint(GLFW_SAMPLES, 4);
+
     this->p_backend_window = glfwCreateWindow(width, height, name.c_str(), NULL, NULL);
     if (!(this->p_backend_window)) {
         printf("glfw window failed");

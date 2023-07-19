@@ -3,21 +3,20 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <iostream>
 #include <string>
 
 
 class t_texture {
 public:
-    GLuint id;
-    t_texture(const unsigned int width, const unsigned int height, const std::string name, const unsigned char *data);
-    t_texture(const unsigned int width, const unsigned int height, const std::string name, const float *data);
-    t_texture(const std::string path, const std::string name);
-    ~t_texture();
-    void use();
+    t_texture(const unsigned int width, const unsigned int height, const std::string name);
+    unsigned int get_id();
     std::string get_name();
+    unsigned int get_width();
+    unsigned int get_height();
+    void use();
 
-private:
+protected:
+    GLuint id;
     std::string name;
     unsigned int width;
     unsigned int height;

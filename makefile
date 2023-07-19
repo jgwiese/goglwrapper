@@ -33,4 +33,4 @@ install: $(TARGET)
 clean:
 	rm -rf $(BUILDDIR) $(TARGET)
 
-
+# TODO: add a deinstall target and also use when building / reinstalling libraries
