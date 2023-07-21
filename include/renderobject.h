@@ -13,7 +13,7 @@ class t_renderobject {
 public:
     t_renderobject(t_mesh *p_mesh);
     ~t_renderobject();
-    void draw(t_program *p_program, t_texture *p_texture);
+    void draw(t_program *p_program, std::vector<t_texture *> *v_texture);
     unsigned int get_indices_size();
 
 private:

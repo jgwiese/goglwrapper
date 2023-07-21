@@ -29,3 +29,8 @@ t_texture_ub* t_texture_ub::from_image(const std::string path, const std::string
     stbi_image_free(data);
     return p_texture_ub;
 }
+
+void t_texture_ub::use(unsigned int i) {
+    glActiveTexture(GL_TEXTURE0 + i);
+    glBindTexture(GL_TEXTURE_2D, this->id);
+}

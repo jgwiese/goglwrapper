@@ -4,20 +4,13 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <string>
+#include "texture.h"
 
 
-class t_texture_ub_depth {
+class t_texture_ub_depth : public t_texture{
 public:
-    GLuint id;
     t_texture_ub_depth(const unsigned int width, const unsigned int height, const std::string name, const unsigned char *data);
-    ~t_texture_ub_depth();
-    void use();
-    std::string get_name();
-
-private:
-    std::string name;
-    unsigned int width;
-    unsigned int height;
+    void use(unsigned int i) override;
 };
 
 #endif // TEXTURE_UB_DEPTH_H

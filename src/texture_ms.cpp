@@ -12,3 +12,8 @@ t_texture_ms::t_texture_ms(const unsigned int width, const unsigned int height, 
     glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
     std::cout << "msaa texture created, id: " << this->id << std::endl;
 }
+
+void t_texture_ms::use(unsigned int i) {
+    glActiveTexture(GL_TEXTURE0 + i);
+    glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, this->id);
+}

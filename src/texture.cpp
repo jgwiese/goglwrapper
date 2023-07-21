@@ -12,10 +12,6 @@ unsigned int t_texture::get_id() {
     return this->id;
 }
 
-void t_texture::use() {
-    glBindTexture(GL_TEXTURE_2D, this->id);
-}
-
 std::string t_texture::get_name() {
     return this->name;
 }

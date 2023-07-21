@@ -41,21 +41,21 @@ t_renderobject::~t_renderobject() {
     glDeleteVertexArrays(1, &this->vao);
 }
 
-void t_renderobject::draw(t_program *p_program, t_texture *p_texture) {
+void t_renderobject::draw(t_program *p_program, std::vector<t_texture *> *v_textures) {
     glUseProgram(p_program->id);
-    if (p_texture != NULL) {
-        GLint tmp = glGetUniformLocation(p_program->id, p_texture->get_name().c_str());
-        glUniform1i(tmp, 0);
-        glActiveTexture(GL_TEXTURE0);
-        // TODO: how to decide when to bind multisample vs normal texture?
-        glBindTexture(GL_TEXTURE_2D, p_texture->get_id());
-        //glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, p_texture->get_id());
+
+    // TODO: not optimal, that here the textures are setup, but the rest of a material is setup in renderer.
+    for (unsigned int i = 0; i < v_textures->size(); i++) {
+        t_texture *p_texture = v_textures->at(i);
+        // TODO: apparently this set_texture_f needs to be done only once before loop, implement later somehow.
+        p_program->set_texture(p_texture, i);
+        p_texture->use(i);
     }
     glBindVertexArray(this->vao);
     glDrawElements(GL_TRIANGLES, this->indices_size, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
     glBindTexture(GL_TEXTURE_2D, 0);
-    //glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
+    glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
     glUseProgram(0);
 }
 

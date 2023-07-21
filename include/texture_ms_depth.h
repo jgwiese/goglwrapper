@@ -7,6 +7,7 @@
 class t_texture_ms_depth : public t_texture {
 public:
     t_texture_ms_depth(const unsigned int width, const unsigned int height, const std::string name, const unsigned int samples);
+    void use(unsigned int i) override;
 
 private:
     unsigned int samples;

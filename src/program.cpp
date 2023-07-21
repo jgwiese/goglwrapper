@@ -21,18 +21,23 @@ t_program::~t_program() {
 void t_program::set_float(std::string name, float v) {
     glUseProgram(this->id);
     glUniform1f(glGetUniformLocation(this->id, name.c_str()), v);
-    glUseProgram(0);
+    //glUseProgram(0);
 }
 
 void t_program::set_vec3(std::string name, glm::vec3 v) {
     glUseProgram(this->id);
     glUniform3fv(glGetUniformLocation(this->id, name.c_str()), 1, &v[0]);
-    glUseProgram(0);
+    //glUseProgram(0);
 }
 
 void t_program::set_transformation(std::string name, glm::mat4 transformation) {
     glUseProgram(this->id);
     glUniformMatrix4fv(glGetUniformLocation(this->id, name.c_str()), 1, GL_FALSE, &transformation[0][0]);
-    glUseProgram(0);
+    //glUseProgram(0);
 }
 
+void t_program::set_texture(t_texture *p_texture, unsigned int i) {
+    glUseProgram(this->id);
+    glUniform1i(glGetUniformLocation(this->id, p_texture->get_name().c_str()), i);
+    //glUseProgram(0);
+}

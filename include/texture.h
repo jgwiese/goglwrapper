@@ -13,7 +13,7 @@ public:
     std::string get_name();
     unsigned int get_width();
     unsigned int get_height();
-    void use();
+    virtual void use(unsigned int i) {};
 
 protected:
     GLuint id;

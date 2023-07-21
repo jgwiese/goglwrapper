@@ -13,3 +13,7 @@ t_texture_f::t_texture_f(const unsigned int width, const unsigned int height, co
     std::cout << "texture created, id: " << this->id << std::endl;
 }
 
+void t_texture_f::use(unsigned int i) {
+    glActiveTexture(GL_TEXTURE0 + i);
+    glBindTexture(GL_TEXTURE_2D, this->id);
+}

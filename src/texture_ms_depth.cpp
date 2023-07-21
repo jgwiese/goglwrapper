@@ -12,3 +12,7 @@ t_texture_ms_depth::t_texture_ms_depth(const unsigned int width, const unsigned 
     std::cout << "msaa depth texture created, id: " << this->id << std::endl;
 }
 
+void t_texture_ms_depth::use(unsigned int i) {
+    glActiveTexture(GL_TEXTURE0 + i);
+    glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, this->id);
+}

@@ -59,7 +59,7 @@ void t_framebuffer::use() {
 
 void t_framebuffer::reset() {
     glBindFramebuffer(GL_FRAMEBUFFER, this->id);
-    glClearColor(0.0, 0.0, 0.0, 1.0);
+    glClearColor(0.0, 1.0, 0.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glEnable(GL_DEPTH_TEST);
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -68,7 +68,8 @@ void t_framebuffer::reset() {
 
 void t_framebuffer::blit(t_framebuffer *p_framebuffer, unsigned int width, unsigned int height) {
     glBindFramebuffer(GL_READ_FRAMEBUFFER, this->id);
-    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, p_framebuffer->get_id());
+    //glBindFramebuffer(GL_DRAW_FRAMEBUFFER, p_framebuffer->get_id());
+    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
     glBlitFramebuffer(0, 0, width, height, 0, 0, width, height, GL_COLOR_BUFFER_BIT, GL_NEAREST);
     glBlitFramebuffer(0, 0, width, height, 0, 0, width, height, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
     glBindFramebuffer(GL_READ_FRAMEBUFFER, 0);
@@ -110,7 +111,7 @@ void t_framebuffer::attach_texture_ub_depth(t_texture_ub_depth *p_texture_ub_dep
     // TODO: do i need to add + i until 16, like in color attachment?
     //unsigned int i = this->v_textures.size();
     this->p_texture_ub_depth = p_texture_ub_depth;
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, p_texture_ub_depth->id, 0);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, p_texture_ub_depth->get_id(), 0);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
