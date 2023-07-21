@@ -41,19 +41,12 @@ t_renderobject::~t_renderobject() {
     glDeleteVertexArrays(1, &this->vao);
 }
 
-void t_renderobject::draw(t_program *p_program, std::vector<t_texture *> *v_textures) {
-    glUseProgram(p_program->id);
-
-    // TODO: not optimal, that here the textures are setup, but the rest of a material is setup in renderer.
-    for (unsigned int i = 0; i < v_textures->size(); i++) {
-        t_texture *p_texture = v_textures->at(i);
-        // TODO: apparently this set_texture_f needs to be done only once before loop, implement later somehow.
-        p_program->set_texture(p_texture, i);
-        p_texture->use(i);
-    }
+void t_renderobject::draw() {
     glBindVertexArray(this->vao);
     glDrawElements(GL_TRIANGLES, this->indices_size, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
+
+    // make sure that nothing else is bound anymore
     glBindTexture(GL_TEXTURE_2D, 0);
     glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
     glUseProgram(0);
