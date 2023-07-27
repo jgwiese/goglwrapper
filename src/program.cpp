@@ -18,6 +18,19 @@ t_program::~t_program() {
 
 }
 
+void t_program::use() {
+    glUseProgram(this->id);
+}
+
+void t_program::set_bool(std::string name, bool v) {
+    glUseProgram(this->id);
+    if (v)
+        glUniform1i(glGetUniformLocation(this->id, name.c_str()), 1);
+    else
+        glUniform1i(glGetUniformLocation(this->id, name.c_str()), 0);
+    //glUseProgram(0);
+}
+
 void t_program::set_float(std::string name, float v) {
     glUseProgram(this->id);
     glUniform1f(glGetUniformLocation(this->id, name.c_str()), v);

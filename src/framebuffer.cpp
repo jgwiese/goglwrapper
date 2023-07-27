@@ -59,7 +59,7 @@ void t_framebuffer::use() {
 
 void t_framebuffer::reset() {
     glBindFramebuffer(GL_FRAMEBUFFER, this->id);
-    glClearColor(0.0, 1.0, 0.0, 1.0);
+    glClearColor(0.5, 0.5, 0.5, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glEnable(GL_DEPTH_TEST);
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -68,8 +68,8 @@ void t_framebuffer::reset() {
 
 void t_framebuffer::blit(t_framebuffer *p_framebuffer, unsigned int width, unsigned int height) {
     glBindFramebuffer(GL_READ_FRAMEBUFFER, this->id);
-    //glBindFramebuffer(GL_DRAW_FRAMEBUFFER, p_framebuffer->get_id());
-    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, p_framebuffer->get_id());
+    //glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
     glBlitFramebuffer(0, 0, width, height, 0, 0, width, height, GL_COLOR_BUFFER_BIT, GL_NEAREST);
     glBlitFramebuffer(0, 0, width, height, 0, 0, width, height, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
     glBindFramebuffer(GL_READ_FRAMEBUFFER, 0);

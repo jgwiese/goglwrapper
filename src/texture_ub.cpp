@@ -1,6 +1,4 @@
 #include "../include/texture_ub.h"
-#define STB_IMAGE_IMPLEMENTATION
-#include <stb_image/stb_image.h>
 #include <iostream>
 
 
@@ -15,22 +13,6 @@ t_texture_ub::t_texture_ub(const unsigned int width, const unsigned int height, 
     std::cout << "texture created, id: " << this->id << std::endl;
 }
 
-t_texture_ub* t_texture_ub::from_image(const std::string path, const std::string name) {
-    int width, height, channels;
-    unsigned char *data = stbi_load(path.c_str(), &width, &height, &channels, 0);
-    if (data == NULL) {
-        std::cout << "error loading the image" << std::endl;
-    }
-    if (channels != 4) {
-        std::cout << "channels != 4" << std::endl;
-    }
-
-    t_texture_ub *p_texture_ub = new t_texture_ub(width, height, name, data);
-    stbi_image_free(data);
-    return p_texture_ub;
-}
-
 void t_texture_ub::use(unsigned int i) {
-    glActiveTexture(GL_TEXTURE0 + i);
     glBindTexture(GL_TEXTURE_2D, this->id);
 }

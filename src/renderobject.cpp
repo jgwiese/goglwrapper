@@ -24,11 +24,11 @@ t_renderobject::t_renderobject(t_mesh *p_mesh) {
 
     // Configure vertex attribute pointers
     glEnableVertexAttribArray(0); // TODO: 0, 1, 2 are kind of fixed assumptions for position, normal, uv... unified way?
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (void *) 0); // NULL?
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(t_vertex), (void *) 0); // NULL?
     glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (void *) (3 * sizeof(float)));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(t_vertex), (void *) (sizeof(glm::vec3)));
     glEnableVertexAttribArray(2);
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (void *) (6 * sizeof(float)));
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(t_vertex), (void *) (2 * sizeof(glm::vec3)));
 
     glBindVertexArray(0);
     
