@@ -7,6 +7,7 @@
 #include <gassets/gassets.h>
 #include "program.h"
 #include "texture.h"
+#include "vertex_array.h"
 
 
 class t_renderobject {
@@ -17,10 +18,11 @@ public:
     unsigned int get_indices_size();
 
 private:
-    GLuint vao;
-    GLuint vbo;
-    GLuint ibo;
-    unsigned int indices_size; // TODO: technially, this should not have the a_.
+    //GLuint vao;
+    //GLuint vbo;
+    //GLuint ibo;
+    //unsigned int indices_size; // TODO: technially, this should not have the a_.
+    t_vertex_array *p_vertex_array;
 };
 
 #endif // RENDEROBJECT_H

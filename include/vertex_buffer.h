@@ -10,14 +10,14 @@
 
 class t_vertex_buffer {
 public:
-    t_vertex_buffer(void *p_data, unsigned long data_size, bool element_data);
+    t_vertex_buffer(std::vector<t_vertex> *v_vertices);
     ~t_vertex_buffer();
     void bind();
     void unbind();
+    std::vector<unsigned int> get_composition_numfloats();
 
 private:
     GLuint id;
-    bool element_data;
 };
 
 

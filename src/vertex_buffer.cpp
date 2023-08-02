@@ -2,15 +2,10 @@
 #include <glad/glad.h>
 
 
-t_vertex_buffer::t_vertex_buffer(void *p_data, unsigned long data_size, bool element_data) {
-    this->element_data = element_data;
+t_vertex_buffer::t_vertex_buffer(std::vector<t_vertex> *v_vertices) {
     glGenBuffers(1, &this->id);
-
     this->bind();
-    if (this->element_data)
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, data_size, p_data, GL_STATIC_DRAW);
-    else
-        glBufferData(GL_ARRAY_BUFFER, data_size, p_data, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(t_vertex) * v_vertices->size(), v_vertices->data(), GL_STATIC_DRAW);
     this->unbind();
 }
 
@@ -19,16 +14,14 @@ t_vertex_buffer::~t_vertex_buffer() {
 }
 
 void t_vertex_buffer::bind() {
-    if (this->element_data)
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->id);
-    else
-        glBindBuffer(GL_ARRAY_BUFFER, this->id);
+    glBindBuffer(GL_ARRAY_BUFFER, this->id);
 }
 
 void t_vertex_buffer::unbind() {
-    if (this->element_data)
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-    else
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
+std::vector<unsigned int> t_vertex_buffer::get_composition_numfloats() {
+    // TODO how to prevent hardcoding of composition of t_vertex.
+    return std::vector<unsigned int> {3, 3, 2};
+}

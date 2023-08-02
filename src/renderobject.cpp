@@ -7,51 +7,21 @@
 
 
 t_renderobject::t_renderobject(t_mesh *p_mesh) {
-    this->indices_size = p_mesh->get_indices()->size();
-
-    // Generate buffers
-    glGenVertexArrays(1, &this->vao);
-    glGenBuffers(1, &this->vbo);
-    glGenBuffers(1, &this->ibo);
-
-    // Bind buffers and upload data
-    glBindVertexArray(this->vao);
-    glBindBuffer(GL_ARRAY_BUFFER, this->vbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(t_vertex) * p_mesh->get_vertices()->size(), p_mesh->get_vertices()->data(), GL_STATIC_DRAW);
-
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->ibo);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * p_mesh->get_indices()->size(), p_mesh->get_indices()->data(), GL_STATIC_DRAW);
-
-    // Configure vertex attribute pointers
-    glEnableVertexAttribArray(0); // TODO: 0, 1, 2 are kind of fixed assumptions for position, normal, uv... unified way?
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(t_vertex), (void *) 0); // NULL?
-    glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(t_vertex), (void *) (sizeof(glm::vec3)));
-    glEnableVertexAttribArray(2);
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(t_vertex), (void *) (2 * sizeof(glm::vec3)));
-
-    glBindVertexArray(0);
-    
-    std::cout << "renderobject created, vao: " << this->vao << ", vbo " << this->vbo << ", ibo " << this->ibo << std::endl;
+    t_vertex_buffer *p_vertex_buffer = new t_vertex_buffer(p_mesh->get_vertices());
+    t_vertex_element_buffer *p_vertex_element_buffer = new t_vertex_element_buffer(p_mesh->get_indices());
+    this->p_vertex_array = new t_vertex_array(p_vertex_buffer, p_vertex_element_buffer);
 }
 
 t_renderobject::~t_renderobject() {
-    glDeleteBuffers(1, &this->ibo);
-    glDeleteBuffers(1, &this->vbo);
-    glDeleteVertexArrays(1, &this->vao);
 }
 
 void t_renderobject::draw() {
-    glBindVertexArray(this->vao);
-    glDrawElements(GL_TRIANGLES, this->indices_size, GL_UNSIGNED_INT, 0);
-    glBindVertexArray(0);
+    this->p_vertex_array->bind();
+    glDrawElements(GL_TRIANGLES, this->p_vertex_array->get_elements_count(), GL_UNSIGNED_INT, 0);
+    this->p_vertex_array->unbind();
 
     // make sure that nothing else is bound anymore
     glBindTexture(GL_TEXTURE_2D, 0);
     glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
     glUseProgram(0);
-}
-
-unsigned int t_renderobject::get_indices_size() {
-    return this->indices_size;
 }
