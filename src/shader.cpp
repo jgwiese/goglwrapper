@@ -3,6 +3,7 @@
 #include <iostream>
 
 
+namespace oglwrapper {
 t_shader::t_shader(std::string path, GLenum shader_type, std::string name) {
     this->name = name;
     char *buffer;
@@ -29,4 +30,5 @@ t_shader::t_shader(std::string path, GLenum shader_type, std::string name) {
 
 t_shader::~t_shader() {
 
+}
 }
