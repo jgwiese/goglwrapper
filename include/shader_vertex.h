@@ -7,7 +7,7 @@
 namespace oglwrapper {
 class t_shader_vertex : public t_shader{
 public:
-    t_shader_vertex(std::string path, std::string name);
+    t_shader_vertex(std::vector<std::string> paths, std::string name);
 };
 }
 

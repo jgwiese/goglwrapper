@@ -4,14 +4,21 @@
 
 
 namespace oglwrapper {
-t_shader::t_shader(std::string path, GLenum shader_type, std::string name) {
+t_shader::t_shader(std::vector<std::string> paths, GLenum shader_type, std::string name) {
     this->name = name;
-    char *buffer;
-    if (parse_file(&buffer, path.c_str()) == 1) {
-        printf("shader file empty\n");
+    GLchar *sources[paths.size() + 1];
+    char *buffer = (char *) "#version 330 core\n";
+    sources[0] = (GLchar *) buffer;
+    for (unsigned int i = 0; i < paths.size(); i++) {
+        char *buffer;
+        if (parse_file(&buffer, paths[i].c_str()) == 1) {
+            printf("shader file empty\n");
+        }
+        sources[i + 1] = (GLchar *) buffer;
     }
+
     this->id = glCreateShader(shader_type);
-    glShaderSource(this->id, 1, (const GLchar **) &buffer, NULL);
+    glShaderSource(this->id, paths.size() + 1, sources, NULL);
     glCompileShader(this->id);
     
     GLint is_compiled = 0;
