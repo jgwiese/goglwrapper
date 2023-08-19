@@ -61,11 +61,21 @@ void t_framebuffer::reset() {
     this->use();
     glClearColor(0.0, 0.0, 0.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    // depth testing
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
+
+    // blending
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     //glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
+
+    // face culling
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
+    //glFrontFace(GL_CW);
+    
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     //glEnable(GL_MULTISAMPLE);
 }
