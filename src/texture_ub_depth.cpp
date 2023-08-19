@@ -10,7 +10,7 @@ t_texture_ub_depth::t_texture_ub_depth(const unsigned int width, const unsigned 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glBindTexture(GL_TEXTURE_2D, 0);
 
-    std::cout << "texture ub depth created, id: " << this->id << std::endl;
+    std::cout << "texture ub depth " << this->name << " created, id: " << this->id << std::endl;
 }
 
 void t_texture_ub_depth::use(unsigned int i) {

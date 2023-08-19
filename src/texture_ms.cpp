@@ -10,7 +10,7 @@ t_texture_ms::t_texture_ms(const unsigned int width, const unsigned int height, 
     // TODO: changed GL_RGB to GL_RGBA
     glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, this->samples, GL_RGBA, width, height, GL_TRUE);
     glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
-    std::cout << "msaa texture created, id: " << this->id << std::endl;
+    std::cout << "msaa texture " << this->name << " created, id: " << this->id << std::endl;
 }
 
 void t_texture_ms::use(unsigned int i) {

@@ -10,7 +10,7 @@ t_texture_ub::t_texture_ub(const unsigned int width, const unsigned int height, 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glBindTexture(GL_TEXTURE_2D, 0);
 
-    std::cout << "texture created, id: " << this->id << std::endl;
+    std::cout << "texture ub " << this->name << " created, id: " << this->id << std::endl;
 }
 
 void t_texture_ub::use(unsigned int i) {
