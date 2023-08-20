@@ -1,27 +1,13 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-#include <string>
+#include "render_target.h"
 
 
-class t_texture {
+class t_texture : public t_render_target{
 public:
-    t_texture(const unsigned int width, const unsigned int height, const std::string name);
-    unsigned int get_id();
-    std::string get_name();
-    unsigned int get_width();
-    unsigned int get_height();
-    virtual void use(unsigned int i) {};
-
-protected:
-    GLuint id;
-    std::string name;
-    unsigned int width;
-    unsigned int height;
+    t_texture(const unsigned int width, const unsigned int height, const std::string name, GLenum internalformat, void *data);
+    void use(unsigned int i) override;
 };
 
-
 #endif // TEXTURE_H
-

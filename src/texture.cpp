@@ -1,25 +1,19 @@
 #include "../include/texture.h"
-#include <glad/glad.h>
 
 
-t_texture::t_texture(const unsigned int width, const unsigned int height, const std::string name) {
-    this->width = width;
-    this->height = height;
-    this->name = name;
+t_texture::t_texture(const unsigned int width, const unsigned int height, const std::string name, GLenum internalformat, void *data) : t_render_target(width, height, name) {
+    glGenTextures(1, &this->id);
+    glBindTexture(GL_TEXTURE_2D, this->id);
+    glTexImage2D(GL_TEXTURE_2D, 0, internalformat, this->width, this->height, 0, internalformat, GL_FLOAT, data);
+    glGenerateMipmap(GL_TEXTURE_2D);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-unsigned int t_texture::get_id() {
-    return this->id;
-}
-
-std::string t_texture::get_name() {
-    return this->name;
-}
-
-unsigned int t_texture::get_width() {
-    return this->width;
-}
-
-unsigned int t_texture::get_height() {
-    return this->height;
+void t_texture::use(unsigned int i) {
+    glActiveTexture(GL_TEXTURE0 + i);
+    glBindTexture(GL_TEXTURE_2D, this->id);
 }

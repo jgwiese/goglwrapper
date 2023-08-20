@@ -11,8 +11,6 @@ t_program::t_program(t_shader *p_shader_vertex, t_shader *p_shader_fragment, std
     glAttachShader(this->id, p_shader_vertex->id);
     glAttachShader(this->id, p_shader_fragment->id);
     glLinkProgram(this->id);
-
-    std::cout << "program created, id: " << this->id << std::endl;
 }
 
 t_program::~t_program() {

@@ -1,9 +1,4 @@
 #include "../include/renderobject.h"
-#include <glad/glad.h>
-#include <stdlib.h>
-#include <string>
-#include <glm/gtx/string_cast.hpp>
-#include <iostream>
 
 
 t_renderobject::t_renderobject(t_mesh *p_mesh) {

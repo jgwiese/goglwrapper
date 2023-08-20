@@ -6,7 +6,7 @@
 #include <string>
 #include <glm/glm.hpp>
 #include "shader.h"
-#include "texture_f.h"
+#include "texture.h"
 
 
 namespace oglwrapper {
@@ -31,4 +31,3 @@ private:
 }
 
 #endif // OGLWRAPPER_PROGRAM_H
-
