@@ -59,6 +59,12 @@ void t_program::set_texture(t_texture *p_texture, unsigned int i) {
     //glUseProgram(0);
 }
 
+void t_program::set_texture(t_texture_cubemap *p_texture, unsigned int i) {
+    this->use();
+    glUniform1i(glGetUniformLocation(this->id, p_texture->get_name().c_str()), i);
+    //glUseProgram(0);
+}
+
 unsigned int t_program::get_id() {
     return this->id;
 }

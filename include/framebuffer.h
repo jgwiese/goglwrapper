@@ -29,6 +29,7 @@ public:
     void check();
     void use();
     void reset();
+    void set_depth_mask(bool value);
     void blit(t_framebuffer *p_framebuffer, unsigned int width, unsigned int height);
     unsigned int get_id();
     t_render_target *get_color_attachment(unsigned int i);

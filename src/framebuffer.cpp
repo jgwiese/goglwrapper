@@ -62,7 +62,8 @@ void t_framebuffer::reset() {
 
     // depth testing
     glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LESS);
+    //glDepthFunc(GL_LESS);
+    glDepthFunc(GL_LEQUAL);
 
     // blending
     glEnable(GL_BLEND);
@@ -72,10 +73,14 @@ void t_framebuffer::reset() {
     // face culling
     glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);
-    //glFrontFace(GL_CW);
+    glFrontFace(GL_CCW);
     
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     //glEnable(GL_MULTISAMPLE);
+}
+
+void t_framebuffer::set_depth_mask(bool value) {
+    glDepthMask((GLboolean) value);
 }
 
 void t_framebuffer::blit(t_framebuffer *p_framebuffer, unsigned int width, unsigned int height) {

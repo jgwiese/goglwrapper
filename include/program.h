@@ -7,6 +7,7 @@
 #include <glm/glm.hpp>
 #include "shader.h"
 #include "texture.h"
+#include "texture_cubemap.h"
 
 
 namespace oglwrapper {
@@ -21,6 +22,7 @@ public:
     void set_vec3(std::string name, glm::vec3 v);
     void set_transformation(std::string name, glm::mat4 transformation);
     void set_texture(t_texture *p_texture, unsigned int i);
+    void set_texture(t_texture_cubemap *p_texture, unsigned int i);
     unsigned int get_id();
     std::string get_name();
 
