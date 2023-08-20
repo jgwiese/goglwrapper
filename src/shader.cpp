@@ -31,8 +31,6 @@ t_shader::t_shader(std::vector<std::string> paths, GLenum shader_type, std::stri
         printf("%s", message);
         glDeleteShader(this->id);
     }
-
-    std::cout << "shader created, id: " << this->id << std::endl;
 }
 
 t_shader::~t_shader() {

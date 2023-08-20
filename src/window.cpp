@@ -5,7 +5,7 @@
 
 t_window::t_window(const unsigned int width, const unsigned int height, const std::string name) {
     if (!glfwInit()) {
-        printf("glfw init failed.");
+        std::cout << "glfw init failed" << std::endl;
     }
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -16,22 +16,21 @@ t_window::t_window(const unsigned int width, const unsigned int height, const st
 
     this->p_backend_window = glfwCreateWindow(width, height, name.c_str(), NULL, NULL);
     if (!(this->p_backend_window)) {
-        printf("glfw window failed");
+        std::cout << "glfw window failed" << std::endl;
     }
     glfwMakeContextCurrent(this->p_backend_window);
 
     if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
-        printf("Failed to initialize OpenGL context.\n");
+        std::cout << "failed to initialize opengl context" << std::endl;
     }
 
     glfwSetKeyCallback(this->p_backend_window, key_callback);
     this->running = true;
-    printf("%s, GLSL: %s\n", glGetString(GL_VERSION), glGetString (GL_SHADING_LANGUAGE_VERSION));
+    std::cout << glGetString(GL_VERSION) << ", glsl: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
     
 }
 
 t_window::~t_window() {
-    std::cout << "window destroy" << std::endl;
     glfwDestroyWindow(this->p_backend_window);
     glfwTerminate();
 }

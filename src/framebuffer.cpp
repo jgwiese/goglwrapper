@@ -6,8 +6,6 @@
 t_framebuffer::t_framebuffer(std::string name) {
     this->name = name;
     glGenFramebuffers(1, &this->id);
-    
-    std::cout << "framebuffer created, id: " << this->id << std::endl;
 }
 
 t_framebuffer::~t_framebuffer() {
@@ -22,31 +20,31 @@ void t_framebuffer::check() {
     GLenum value = glCheckFramebufferStatus(GL_FRAMEBUFFER);
     switch(value) {
         case GL_FRAMEBUFFER_UNDEFINED:
-            printf("error: framebuffer undefined\n");
+            std::cout << "error: framebuffer undefined" << std::endl;
             break;
         case GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT:
-            printf("error: framebuffer incomplete attachment\n");
+            std::cout << "error: framebuffer incomplete attachment" << std::endl;
             break;
         case GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT:
-            printf("error: framebuffer incomplete missing attachment\n");
+            std::cout << "error: framebuffer incomplete missing attachment" << std::endl;
             break;
         case GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER:
-            printf("error: framebuffer incomplete draw buffer\n");
+            std::cout << "error: framebuffer incomplete draw buffer" << std::endl;
             break;
         case GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER:
-            printf("error: framebuffer incomplete read buffer\n");
+            std::cout << "error: framebuffer incomplete read buffer" << std::endl;
             break;
         case GL_FRAMEBUFFER_UNSUPPORTED:
-            printf("error: framebuffer unsupported\n");
+            std::cout << "error: framebuffer unsupported" << std::endl;
             break;
         case GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE:
-            printf("error: framebuffer incomplete multisample\n");
+            std::cout << "error: framebuffer incomplete multisample" << std::endl;
             break;
         case GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS:
-            printf("error: framebuffer incomplete layer targets\n");
+            std::cout << "error: framebuffer incomplete layer targets" << std::endl;
             break;
         default:
-            printf("success: framebuffer is complete\n");
+            //std::cout << "success: framebuffer is complete\n" << std::endl;
             break;
     }
 
