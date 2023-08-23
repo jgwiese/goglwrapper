@@ -13,7 +13,7 @@
 namespace oglwrapper {
 class t_program {
 public:
-    t_program(t_shader *p_shader_vertex, t_shader *p_shader_fragment, std::string name);
+    t_program(t_shader *p_shader_vertex, t_shader *p_shader_geometry, t_shader *p_shader_fragment, std::string name);
     ~t_program();
     void use();
     void set_bool(std::string name, bool v);

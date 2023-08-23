@@ -5,10 +5,12 @@
 
 
 namespace oglwrapper {
-t_program::t_program(t_shader *p_shader_vertex, t_shader *p_shader_fragment, std::string name) {
+t_program::t_program(t_shader *p_shader_vertex, t_shader *p_shader_geometry, t_shader *p_shader_fragment, std::string name) {
     this->id = glCreateProgram();
     this->name = name;
     glAttachShader(this->id, p_shader_vertex->id);
+    if (p_shader_geometry != NULL)
+        glAttachShader(this->id, p_shader_geometry->id);
     glAttachShader(this->id, p_shader_fragment->id);
     glLinkProgram(this->id);
 }

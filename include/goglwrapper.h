@@ -21,6 +21,7 @@
 #include "texture_cubemap.h"
 #include "shader.h"
 #include "shader_vertex.h"
+#include "shader_geometry.h"
 #include "shader_fragment.h"
 #include "program.h"
 #include "renderobject.h"
