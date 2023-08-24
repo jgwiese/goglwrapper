@@ -1,10 +1,10 @@
 #include "../include/texture.h"
 
 
-t_texture::t_texture(const unsigned int width, const unsigned int height, const std::string name, GLenum internalformat, void *data) : t_render_target(width, height, name) {
+t_texture::t_texture(const unsigned int width, const unsigned int height, const std::string name, GLenum internalformat, GLenum format, void *data) : t_render_target(width, height, name) {
     glGenTextures(1, &this->id);
     glBindTexture(GL_TEXTURE_2D, this->id);
-    glTexImage2D(GL_TEXTURE_2D, 0, internalformat, this->width, this->height, 0, internalformat, GL_FLOAT, data);
+    glTexImage2D(GL_TEXTURE_2D, 0, internalformat, this->width, this->height, 0, format, GL_FLOAT, data);
     glGenerateMipmap(GL_TEXTURE_2D);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);

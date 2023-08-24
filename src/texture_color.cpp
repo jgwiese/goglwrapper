@@ -2,7 +2,7 @@
 #include <gassets/gassets.h>
 
 
-t_texture_color::t_texture_color(const unsigned int width, const unsigned int height, const std::string name, const float *data) : t_texture(width, height, name, GL_RGBA, (void *) data) {
+t_texture_color::t_texture_color(const unsigned int width, const unsigned int height, const std::string name, const float *data) : t_texture(width, height, name, GL_RGBA, GL_RGBA, (void *) data) {
 
 }
 
