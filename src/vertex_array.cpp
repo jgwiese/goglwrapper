@@ -2,9 +2,10 @@
 #include <gassets/vertex.h>
 #include <glad/glad.h>
 #include <iostream>
+#include <glm/glm.hpp>
 
 
-t_vertex_array::t_vertex_array(t_vertex_buffer *p_vertex_buffer, t_vertex_element_buffer *p_vertex_element_buffer) {
+t_vertex_array::t_vertex_array(t_vertex_buffer *p_vertex_buffer, t_vertex_element_buffer *p_vertex_element_buffer, t_vertex_buffer *p_vertex_buffer_instances) {
     this->attributes_counter = 0;
     this->p_vertex_buffer = p_vertex_buffer;
     this->p_vertex_element_buffer = p_vertex_element_buffer;
@@ -14,7 +15,9 @@ t_vertex_array::t_vertex_array(t_vertex_buffer *p_vertex_buffer, t_vertex_elemen
 
     unsigned long stride = 0;
     unsigned long stride_tmp = 0;
-    std::vector<unsigned int> composition_numfloats = p_vertex_buffer->get_composition_numfloats();
+
+    // TODO remove hardcoded compositions and also instances composition somehow.
+    std::vector<unsigned int> composition_numfloats = {3, 3, 2};
 
     for (unsigned int i = 0; i < composition_numfloats.size(); i++) {
         stride += composition_numfloats[i];
@@ -29,6 +32,16 @@ t_vertex_array::t_vertex_array(t_vertex_buffer *p_vertex_buffer, t_vertex_elemen
         stride_tmp += composition_numfloats[i];
         this->attributes_counter += 1;
     }
+
+    // instance buffer
+    p_vertex_buffer_instances->bind();
+    for (unsigned int i = 0; i < 4; i++) {
+        glVertexAttribPointer(this->attributes_counter, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(glm::vec4), (void *) (i * sizeof(glm::vec4)));
+        glEnableVertexAttribArray(this->attributes_counter);
+        glVertexAttribDivisor(this->attributes_counter, 1);
+        this->attributes_counter += 1;
+    }
+
     this->unbind();
 }
 
