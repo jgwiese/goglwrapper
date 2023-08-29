@@ -27,7 +27,6 @@ t_window::t_window(const unsigned int width, const unsigned int height, const st
     glfwSetKeyCallback(this->p_backend_window, key_callback);
     this->running = true;
     std::cout << glGetString(GL_VERSION) << ", glsl: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
-    
 }
 
 t_window::~t_window() {

@@ -6,6 +6,27 @@
 t_framebuffer::t_framebuffer(std::string name) {
     this->name = name;
     glGenFramebuffers(1, &this->id);
+    this->use();
+
+    glClearColor(0.0, 0.0, 0.0, 1.0);
+
+    // depth testing
+    glEnable(GL_DEPTH_TEST);
+    //glDepthFunc(GL_LESS);
+    glDepthFunc(GL_LEQUAL);
+
+    // blending
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    //glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
+
+    // face culling
+    glEnable(GL_CULL_FACE);
+    glFrontFace(GL_CCW);
+    this->cull_face_back();
+    
+    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    //glEnable(GL_MULTISAMPLE);
 }
 
 t_framebuffer::~t_framebuffer() {
@@ -57,26 +78,11 @@ void t_framebuffer::use() {
 
 void t_framebuffer::reset() {
     this->use();
-    glClearColor(0.0, 0.0, 0.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
 
-    // depth testing
-    glEnable(GL_DEPTH_TEST);
-    //glDepthFunc(GL_LESS);
-    glDepthFunc(GL_LEQUAL);
-
-    // blending
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    //glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
-
-    // face culling
-    glEnable(GL_CULL_FACE);
-    glCullFace(GL_BACK);
-    glFrontFace(GL_CCW);
-    
-    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    //glEnable(GL_MULTISAMPLE);
+void t_framebuffer::set_viewport(unsigned int width, unsigned int height) {
+    glViewport(0, 0, width, height);
 }
 
 void t_framebuffer::set_depth_mask(bool value) {
@@ -108,6 +114,16 @@ void t_framebuffer::setup_draw_buffers() {
         attachments[i] = GL_COLOR_ATTACHMENT0 + i;
     }
     glDrawBuffers(this->v_render_targets.size(), attachments);
+}
+
+void t_framebuffer::disable_draw_buffer() {
+    this->use();
+    glDrawBuffer(GL_NONE);
+}
+
+void t_framebuffer::disable_read_buffer() {
+    this->use();
+    glReadBuffer(GL_NONE);
 }
 
 void t_framebuffer::attach_render_target_color(t_texture *p_texture) {
@@ -168,3 +184,16 @@ t_render_target *t_framebuffer::get_depth_attachment() {
     return this->p_render_target_depth;
 }
 
+void t_framebuffer::cull_face_front() {
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_FRONT);
+}
+
+void t_framebuffer::cull_face_back() {
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
+}
+
+void t_framebuffer::cull_face_disable() {
+    glDisable(GL_CULL_FACE);
+}

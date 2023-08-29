@@ -8,6 +8,7 @@ t_shader::t_shader(std::vector<std::string> paths, GLenum shader_type, std::stri
     this->name = name;
     GLchar *sources[paths.size() + 1];
     char *buffer = (char *) "#version 330 core\n";
+    //char *buffer = (char *) "#version 460 core\n";
     sources[0] = (GLchar *) buffer;
     for (unsigned int i = 0; i < paths.size(); i++) {
         char *buffer;

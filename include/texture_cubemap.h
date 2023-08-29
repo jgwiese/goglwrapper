@@ -10,6 +10,7 @@
 class t_texture_cubemap : public t_render_target {
 public:
     t_texture_cubemap(std::string name, std::vector<std::string> paths);
+    t_texture_cubemap(std::string name);
     void use(unsigned int i) override;
 
 private:

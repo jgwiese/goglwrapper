@@ -20,6 +20,8 @@ public:
     t_framebuffer(std::string name);
     ~t_framebuffer();
     void setup_draw_buffers();
+    void disable_draw_buffer();
+    void disable_read_buffer();
     void attach_render_target_color(t_texture *p_texture);
     void attach_render_target_color(t_texture_ms *p_texture);
     void attach_render_target_depth(t_texture_depth *p_texture);
@@ -29,6 +31,10 @@ public:
     void check();
     void use();
     void reset();
+    void cull_face_disable();
+    void cull_face_front();
+    void cull_face_back();
+    void set_viewport(unsigned int width, unsigned int height);
     void set_depth_mask(bool value);
     void blit(t_framebuffer *p_framebuffer, unsigned int width, unsigned int height);
     unsigned int get_id();
