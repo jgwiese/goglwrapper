@@ -14,6 +14,7 @@ public:
     void bind();
     void unbind();
     unsigned int get_elements_count();
+    GLuint get_id();
 
 private:
     GLuint id;

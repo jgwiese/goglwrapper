@@ -16,6 +16,7 @@ public:
     void update(float *data, unsigned int count_size);
     void bind();
     void unbind();
+    GLuint get_id();
 
 private:
     GLuint id;

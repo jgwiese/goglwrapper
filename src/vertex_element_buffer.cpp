@@ -24,3 +24,7 @@ void t_vertex_element_buffer::unbind() {
 unsigned int t_vertex_element_buffer::get_elements_count() {
     return this->elements_count;
 }
+
+GLuint t_vertex_element_buffer::get_id() {
+    return this->id;
+}

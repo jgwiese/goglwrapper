@@ -3,6 +3,7 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
 #include <string>
 #include <vector>
 #include "render_target.h"
@@ -17,12 +18,13 @@
 
 class t_framebuffer {
 public:
-    t_framebuffer(std::string name);
+    t_framebuffer(std::string name, glm::vec4 color_clear = glm::vec4(0.0, 0.0, 0.0, 1.0));
     ~t_framebuffer();
     void setup_draw_buffers();
     void disable_draw_buffer();
     void disable_read_buffer();
     void attach_render_target_color(t_texture *p_texture);
+    void set_render_target_color(unsigned int i, t_texture *p_texture);
     void attach_render_target_color(t_texture_ms *p_texture);
     void attach_render_target_depth(t_texture_depth *p_texture);
     void attach_render_target_depth(t_texture_ms_depth *p_texture);
@@ -44,10 +46,10 @@ public:
 private:
     std::string name;
     GLuint id;
+    glm::vec4 color_clear;
     std::vector<t_render_target *> v_render_targets;
     t_render_target *p_render_target_depth;
 };
 
 #endif // FRAMEBuFFER_H
-
 

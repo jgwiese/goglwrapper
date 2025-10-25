@@ -1,14 +1,17 @@
 #include "../include/framebuffer.h"
 #include <glad/glad.h>
 #include <iostream>
+#include <string>
 
 
-t_framebuffer::t_framebuffer(std::string name) {
-    this->name = name;
-    glGenFramebuffers(1, &this->id);
+t_framebuffer::t_framebuffer(std::string name, glm::vec4 color_clear) : name(name), color_clear(color_clear) {
+    std::cout << "name: " << name << std::endl;
+    if (this->name.compare("default") != 0) {
+        std::cout << "here comparped" << std::endl;
+        glGenFramebuffers(1, &this->id);
+        //this->id = 0;
+    }
     this->use();
-
-    glClearColor(0.0, 0.0, 0.0, 1.0);
 
     // depth testing
     glEnable(GL_DEPTH_TEST);
@@ -21,12 +24,13 @@ t_framebuffer::t_framebuffer(std::string name) {
     //glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
 
     // face culling
-    glEnable(GL_CULL_FACE);
-    glFrontFace(GL_CCW);
-    this->cull_face_back();
+    //glEnable(GL_CULL_FACE);
+    //glFrontFace(GL_CCW);
+    //this->cull_face_back();
     
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     //glEnable(GL_MULTISAMPLE);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 t_framebuffer::~t_framebuffer() {
@@ -65,7 +69,7 @@ void t_framebuffer::check() {
             std::cout << "error: framebuffer incomplete layer targets" << std::endl;
             break;
         default:
-            //std::cout << "success: framebuffer is complete\n" << std::endl;
+            std::cout << "success: framebuffer is complete" << std::endl;
             break;
     }
 
@@ -74,6 +78,12 @@ void t_framebuffer::check() {
 
 void t_framebuffer::use() {
     glBindFramebuffer(GL_FRAMEBUFFER, this->id);
+    glClearColor(
+        this->color_clear.x,
+        this->color_clear.y,
+        this->color_clear.z,
+        this->color_clear.w
+    );
 }
 
 void t_framebuffer::reset() {
@@ -127,12 +137,16 @@ void t_framebuffer::disable_read_buffer() {
 }
 
 void t_framebuffer::attach_render_target_color(t_texture *p_texture) {
-    this->use();
     unsigned int i = this->v_render_targets.size();
     this->v_render_targets.push_back(p_texture);
+    this->set_render_target_color(i, p_texture);
+    this->setup_draw_buffers();
+}
+
+void t_framebuffer::set_render_target_color(unsigned int i, t_texture *p_texture) {
+    this->use();
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D, p_texture->get_id(), 0);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
-    this->setup_draw_buffers();
 }
 
 void t_framebuffer::attach_render_target_color(t_texture_ms *p_texture) {

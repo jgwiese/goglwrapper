@@ -1,7 +1,7 @@
 #include "../include/texture.h"
 
 
-t_texture::t_texture(const unsigned int width, const unsigned int height, const std::string name, GLenum internalformat, GLenum format, void *data) : t_render_target(width, height, name) {
+t_texture::t_texture(const unsigned int width, const unsigned int height, const std::string name, GLenum internalformat, GLenum format, void *data) : t_render_target(width, height, name), internalformat(internalformat), format(format) {
     glGenTextures(1, &this->id);
     glBindTexture(GL_TEXTURE_2D, this->id);
     glTexImage2D(GL_TEXTURE_2D, 0, internalformat, this->width, this->height, 0, format, GL_FLOAT, data);
@@ -17,4 +17,11 @@ t_texture::t_texture(const unsigned int width, const unsigned int height, const 
 void t_texture::use(unsigned int i) {
     glActiveTexture(GL_TEXTURE0 + i);
     glBindTexture(GL_TEXTURE_2D, this->id);
+}
+
+void t_texture::set(void *data) {
+    glBindTexture(GL_TEXTURE_2D, this->id);
+    glTexImage2D(GL_TEXTURE_2D, 0, this->internalformat, this->width, this->height, 0, this->format, GL_FLOAT, data);
+    glGenerateMipmap(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, 0);
 }

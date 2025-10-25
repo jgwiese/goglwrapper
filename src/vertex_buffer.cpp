@@ -25,3 +25,7 @@ void t_vertex_buffer::bind() {
 void t_vertex_buffer::unbind() {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
+
+GLuint t_vertex_buffer::get_id() {
+    return this->id;
+}
