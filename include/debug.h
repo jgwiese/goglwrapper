@@ -4,4 +4,3 @@
 void print_glerror();
 
 #endif // GL_DEBUG_H
-

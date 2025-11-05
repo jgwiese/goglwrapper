@@ -1,8 +1,7 @@
 #include "../include/vertex_array.h"
+#include "../include/gl.h"
 #include <gassets/vertex.h>
-#include <glad/glad.h>
 #include <glm/glm.hpp>
-#include <iostream>
 
 t_vertex_array::t_vertex_array(t_vertex_buffer *p_vertex_buffer,
                                t_vertex_element_buffer *p_vertex_element_buffer,

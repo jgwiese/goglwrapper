@@ -23,11 +23,12 @@ t_window::t_window(const unsigned int width, const unsigned int height,
   }
   glfwMakeContextCurrent(this->p_backend_window);
 
-  if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+  if (!gladLoadGLES2Loader((GLADloadproc)glfwGetProcAddress)) {
     std::cout << "failed to initialize opengl context" << std::endl;
   }
 
   glfwSetKeyCallback(this->p_backend_window, key_callback);
+  glfwSetFramebufferSizeCallback(this->p_backend_window, resize);
   this->running = true;
   std::cout << glGetString(GL_VERSION)
             << ", glsl: " << glGetString(GL_SHADING_LANGUAGE_VERSION)
@@ -72,4 +73,8 @@ static void key_callback(GLFWwindow *p_backend_window, int key, int scancode,
                          int action, int mods) {
   if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
     glfwSetWindowShouldClose(p_backend_window, GLFW_TRUE);
+}
+
+static void resize(GLFWwindow *p_window, int width, int height) {
+  glViewport(0, 0, width, height);
 }

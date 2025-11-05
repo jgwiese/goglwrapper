@@ -1,6 +1,5 @@
 #include "../include/shader.h"
 #include <ioc/ioc.h>
-#include <iostream>
 
 namespace oglwrapper {
 t_shader::t_shader(std::vector<std::string> paths, GLenum shader_type,

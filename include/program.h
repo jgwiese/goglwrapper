@@ -1,11 +1,10 @@
 #ifndef OGLWRAPPER_PROGRAM_H
 #define OGLWRAPPER_PROGRAM_H
 
+#include "gl.h"
 #include "shader.h"
 #include "texture.h"
 #include "texture_cubemap.h"
-#include <GLFW/glfw3.h>
-#include <glad/glad.h>
 #include <glm/glm.hpp>
 #include <string>
 

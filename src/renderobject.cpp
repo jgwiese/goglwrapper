@@ -1,5 +1,4 @@
 #include "../include/renderobject.h"
-#include <iostream>
 
 t_renderobject::t_renderobject(t_mesh *p_mesh, glm::mat4 transformation) {
   t_vertex_buffer *p_vertex_buffer =
@@ -28,7 +27,7 @@ void t_renderobject::draw() {
 
   // make sure that nothing else is bound anymore
   glBindTexture(GL_TEXTURE_2D, 0);
-  glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
+  // glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
   glUseProgram(0);
 }
 

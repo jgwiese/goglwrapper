@@ -1,6 +1,4 @@
 #include "../include/program.h"
-#include <glad/glad.h>
-#include <iostream>
 #include <string>
 
 namespace oglwrapper {
