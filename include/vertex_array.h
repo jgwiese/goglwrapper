@@ -7,20 +7,18 @@
 
 class t_vertex_array {
 public:
-  t_vertex_array(t_vertex_buffer *p_vertex_buffer,
-                 t_vertex_element_buffer *p_vertex_element_buffer,
-                 t_vertex_buffer *p_vertex_buffer_instances);
+  t_vertex_array();
   ~t_vertex_array();
+  void add_vertex_buffer(t_vertex_buffer *p_vertex_buffer);
+  void add_instance_buffer(t_vertex_buffer *p_vertex_buffer);
+  void add_element_buffer(t_vertex_element_buffer *p_vertex_element_buffer);
   void bind();
   void unbind();
-  unsigned int get_elements_count();
   GLuint get_id();
 
 private:
   GLuint id;
   unsigned int attributes_counter;
-  t_vertex_buffer *p_vertex_buffer;
-  t_vertex_element_buffer *p_vertex_element_buffer;
 };
 
 #endif // VERTEX_ARRAY_H

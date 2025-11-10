@@ -6,7 +6,7 @@
 
 class t_vertex_element_buffer {
 public:
-  t_vertex_element_buffer(std::vector<unsigned int> *v_indices);
+  t_vertex_element_buffer(const std::vector<unsigned int> &v_indices);
   ~t_vertex_element_buffer();
   void bind();
   void unbind();

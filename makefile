@@ -17,7 +17,8 @@ OBJECTS_NATIVE := $(patsubst $(SOURCEDIR)/%, $(BUILDDIR_NATIVE)/%, $(SOURCES:.cp
 OBJECTS_WASM := $(patsubst $(SOURCEDIR)/%, $(BUILDDIR_WASM)/%, $(SOURCES:.cpp=.o))
 
 # compiler flags
-COMPILER_FLAGS := -std=gnu++20 -fPIC
+DEBUG_FLAGS := -g -O0
+COMPILER_FLAGS := -std=gnu++20 -fPIC $(DEBUG_FLAGS)
 
 ifeq ($(PREFIX),)
 	PREFIX := /usr/local
